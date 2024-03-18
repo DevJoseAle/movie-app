@@ -27,6 +27,9 @@ end
 
 target 'Component' do
   config = use_native_modules!
+  pod 'AFNetworking', '~> 2.6'
+  pod 'ORStackView', '~> 3.0'
+  pod 'SwiftyJSON', '~> 2.3'
 
   use_react_native!(
     :path => config[:reactNativePath],
