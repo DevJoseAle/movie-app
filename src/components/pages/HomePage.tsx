@@ -18,7 +18,7 @@ export const HomePage = () => {
         globalStyles.mainContainer
     }>  
     <SearchOrganism />
-
+ 
 
     </View>
   )
