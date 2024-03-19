@@ -6,13 +6,15 @@ export interface ThemeColors {
   background: string;
   cardBackground: string;
   buttonTextColor: string;
+  secondary: string;
 }
 
 export const colors: ThemeColors = {
   primary: "#5856D6",
-  text: "black",
+  text: "#F4F4FF",
 
-  background: "#F3F2F7",
+  background: "#565656",
+  secondary: "#474747",
   cardBackground: "white",
   buttonTextColor: "white",
 };
@@ -48,4 +50,10 @@ export const globalStyles = StyleSheet.create({
     color: colors.text,
     fontSize: 16,
   },
+  customHeader:{
+    backgroundColor: colors.secondary,
+    height:100,
+
+
+  }
 });
