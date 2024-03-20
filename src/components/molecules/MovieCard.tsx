@@ -1,6 +1,8 @@
 import React from 'react'
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import { Movie } from '../../interfaces/responseInterface'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { RootStackParams } from '../../navigator/Navigation'
 
 
 interface Props{
@@ -8,10 +10,11 @@ interface Props{
 }
 
 export const MovieCard = ({movie}:Props) => {
+  const navigation = useNavigation<NavigationProp<RootStackParams>>()
 
   return (
     <Pressable
-     onPress={() => console.log('onPress')}
+     onPress={() => (navigation.navigate('Movie', {movieId: movie.imdbID}))}
      style={styles.cardContainer}>
    
             <Image source={{uri: movie.Poster}} style={styles.image} />
