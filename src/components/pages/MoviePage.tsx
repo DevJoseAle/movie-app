@@ -1,18 +1,23 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { Text, View } from 'react-native'
-import { MovieDetails, Movie } from '../../interfaces/responseInterface';
+import React, { useLayoutEffect} from 'react'
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { RootStackParams } from '../../navigator/Navigation'
 import { StackScreenProps } from '@react-navigation/stack'
-import { getMovie } from '../../api/getMovie';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useMovieDetails } from '../../hooks/useMovieDetails';
+import { globalStyles } from '../../config/theme/AppTheme';
+import { MovieDetailHeader } from '../organisms/MovieDetailsHeader';
+import { MovieDetails } from '../organisms/MovieDetails';
 
 interface Props extends StackScreenProps<RootStackParams, 'Movie'>{};
 export const MoviePage = ({route}:Props) => {
+  
+  
+  const {movieId} = route.params;
+  
+  const navigation = useNavigation()
+  const {movie, loading} = useMovieDetails(movieId)
+  const params = useRoute()
 
-    const {movieId} = route.params;
-    const navigation = useNavigation()
-    const {movie, loading} = useMovieDetails(movieId)
 
     useLayoutEffect(() => { 
       navigation.setOptions({
@@ -20,10 +25,21 @@ export const MoviePage = ({route}:Props) => {
       })}, [movie, navigation])
 
 
+   
+    if(!movie)return;
+
 
   return (
-    <View>
-      <Text>MoviePage</Text>
-    </View>
+    <ScrollView
+    showsVerticalScrollIndicator={false}
+    style={[globalStyles.mainContainer, {backgroundColor:'#000000CE'}]}>
+      <MovieDetailHeader fullMovie={movie} />
+      <MovieDetails 
+        plot={movie.Plot} 
+        released={movie.Released} 
+        runtime={movie.Runtime} 
+        actors={movie.Actors} 
+        director={movie.Director} />
+    </ScrollView>
   )
 }

@@ -12,10 +12,11 @@ interface Props{
     onpress?: any
     hasBadge?: boolean
     isPressable?: boolean
+    bold?: boolean
 
 
 }
-export const CustomIcon = ({name, size, color, onpress, hasBadge = false, isPressable = true}:Props) => {
+export const CustomIcon = ({name, size, color, onpress, hasBadge = false, isPressable = true,bold = false}:Props) => {
 
   return (
     <View>
@@ -38,7 +39,7 @@ export const CustomIcon = ({name, size, color, onpress, hasBadge = false, isPres
           style={styles.container}
              
              >
-           <Icon name={name} size={size} color={color} />
+           <Icon name={name} size={size} color={color} style={  { fontWeight: bold ? 'bold' : 'normal'}} />
          </View>
       }
     

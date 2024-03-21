@@ -5,12 +5,13 @@ import { BottomTabs } from './BottomTabs';
 import { FavoritePage } from '../components/pages/FavoritePage';
 import { MoviePage } from '../components/pages/MoviePage';
 import { colors } from '../config/theme/AppTheme';
+import { SearchResultsPage } from '../components/pages/SearchResultsPage';
 
 
 export type RootStackParams = {
   Inicio: undefined;
-  Favoritos: undefined,
-  Movie: { movieId: string };
+  Search: undefined,
+  Movie: { movieId: string, previousScreen: string};
 }
 const Stack = createStackNavigator<RootStackParams>();
 
@@ -24,20 +25,17 @@ export const Navigation = () => {
         name="Inicio" 
         component={HomePage} 
         />
+
       <Stack.Screen 
-        
-        name="Favoritos" 
-        component={FavoritePage} 
+        options={{
+          header: () => <CustomHeader title="Búsqueda" icon/>
+        }}
+        name="Search" 
+        component={SearchResultsPage} 
       />
       <Stack.Screen 
         options={{
-          headerStyle: {
-            backgroundColor: colors.secondary
-          },
-          headerTintColor: colors.text,
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
+        headerShown: false
         }}
         name="Movie" 
         component={MoviePage } 

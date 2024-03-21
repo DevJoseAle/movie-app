@@ -30,7 +30,7 @@ export const BottomTabs = () => {
         name="Home"  
         options={{
           title:'Inicio',
-          tabBarIcon: ({color})=> (<CustomIcon name='home-outline' size={20} color={colors.text} isPressable={false}/>)
+          tabBarIcon: ({color})=> (<CustomIcon name='home-outline' size={25} color={color} isPressable={false}/>)
         }} 
         component={Navigation} 
       />
@@ -45,12 +45,14 @@ export const BottomTabs = () => {
         headerTitleStyle: {
           color: colors.text
         },
+        
         title:'Mis Favoritos',
+        
         tabBarIcon: ({color})=> (
         <CustomIcon 
           name='heart-outline' 
-          size={20} 
-          color={colors.text} 
+          size={28} 
+          color={color} 
           isPressable={false}
         />)
       }} 

@@ -14,7 +14,7 @@ export const MovieCard = ({movie}:Props) => {
 
   return (
     <Pressable
-     onPress={() => (navigation.navigate('Movie', {movieId: movie.imdbID}))}
+     onPress={() => (navigation.navigate('Movie', {movieId: movie.imdbID, previousScreen: 'inicio'}))}
      style={styles.cardContainer}>
    
             <Image source={{uri: movie.Poster}} style={styles.image} />
