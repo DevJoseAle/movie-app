@@ -9,6 +9,7 @@ import { RootStackParams } from '../../navigator/Navigation';
 import { MovieListItem } from '../molecules/MovieListItem';
 import { useAppSelector } from '../../redux/hooks';
 import { Title } from '../atoms/Title';
+import { NoFavorites } from '../atoms/NoFavorites';
 
 export const FavoritePage = () => {
   
@@ -22,7 +23,7 @@ export const FavoritePage = () => {
         ? <FlatList
             data={favorites}
             keyExtractor={(item) => item.imdbID}
-            renderItem={({item}) => <MovieListItem movie={item}/>}
+            renderItem={({item}) => <MovieListItem movie={item} />}
           />
         : <NoFavorites/>
       }
@@ -30,10 +31,3 @@ export const FavoritePage = () => {
   )
 }
 
-export const NoFavorites = () => {
-  return (
-    <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
-      <Title title={'  No tienes Pelis \nEn tus Favoritos🙁'} marginLeft={10}  size={25}/>
-    </View>
-  )
-}

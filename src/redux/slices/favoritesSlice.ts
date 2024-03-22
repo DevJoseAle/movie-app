@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { setStorage } from '../../utils/setStorage';
+import { removeStorage } from '../../utils/removeItemStorage';
 
 interface AddFavoriteState {
   Title:  string;
@@ -22,13 +24,17 @@ export const favoriteSlice = createSlice({
       const {imdbID}  = action.payload
       if(state.some(movie => movie.imdbID === imdbID)) return;
       state.push(action.payload)
+      setStorage(state, 'favorites')
 
       
     },
     removeFavorite: (state, action: PayloadAction<RemoveFavoriteState>) =>{
 
-      const {imdbID}  = action.payload
-      return state.filter(movie => movie.imdbID !== imdbID)
+      const {imdbID}  = action.payload;
+      const dataFiltered = state.filter(movie => movie.imdbID !== imdbID);
+      removeStorage();
+      setStorage(dataFiltered, 'favorites')
+      return dataFiltered
     }
   },
 })

@@ -7,12 +7,14 @@ import { CustomIcon } from "./CustomIcon"
 import { useAppDispatch } from "../../redux/hooks"
 import { removeFavorite } from "../../redux/slices/favoritesSlice"
 import toastMessages from "../../utils/toastMessages"
+import { onShare } from "../../utils/onShared"
 
 
 interface Props{
     movie: Movie
+    isFavorite?: boolean
   }
-  export const MovieListItem = ({movie}:Props) => {
+  export const MovieListItem = ({movie, isFavorite=true}:Props) => {
 
     const dispatch = useAppDispatch()
     const platform = Platform.OS;
@@ -23,6 +25,7 @@ interface Props{
       toastMessages({type: 'error', text1: 'Eliminado de Favoritos', text2: 'Hemos Eliminado esta peli de Favoritos!'})
       
     }
+
     return (
       <Pressable
       onPress={() => (navigation.navigate('Movie', {movieId: movie.imdbID, previousScreen:'Inicio'} ))}
@@ -38,13 +41,16 @@ interface Props{
           </View>
   
           <View style={{flexDirection: 'row'}}>
-            <CustomIcon name={platform === 'ios' ? 'share-outline' : 'share-social-outline'} size={30} color={colors.text}/>
-            <CustomIcon 
-            name='close-circle-outline' 
-            size={30} 
-            color={colors.text}
-            onpress={removeFavorites}
-            />
+            {
+              isFavorite && <CustomIcon 
+              name='close-circle-outline' 
+              size={30} 
+              color={colors.text}
+              onpress={removeFavorites}
+              />
+
+            }
+
           </View>
   
         </View>

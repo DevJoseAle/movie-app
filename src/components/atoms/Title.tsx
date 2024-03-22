@@ -32,7 +32,7 @@ export const Title = ({
   return (
     <View
     style={{
-        marginTop: hasInsets && platform === 'ios' ? insets : marginTop,
+        // marginTop: hasInsets && platform === 'ios' ? insets : marginTop,
         marginBottom: marginBottom,
         marginLeft: marginLeft,
         marginRight: marginRight,

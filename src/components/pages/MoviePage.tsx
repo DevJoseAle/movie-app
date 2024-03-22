@@ -7,6 +7,7 @@ import { useMovieDetails } from '../../hooks/useMovieDetails';
 import { globalStyles } from '../../config/theme/AppTheme';
 import { MovieDetailHeader } from '../organisms/MovieDetailsHeader';
 import { MovieDetails } from '../organisms/MovieDetails';
+import { CustomLoadingSpinner } from '../organisms/CustomLoadingSpinner';
 
 interface Props extends StackScreenProps<RootStackParams, 'Movie'>{};
 export const MoviePage = ({route}:Props) => {
@@ -27,6 +28,7 @@ export const MoviePage = ({route}:Props) => {
 
    
     if(!movie)return;
+    if(loading) return <CustomLoadingSpinner />
 
 
   return (

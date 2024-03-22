@@ -5,14 +5,14 @@ import { MovieDetails } from "../interfaces/responseInterface";
 export const onShare = async (fullMovie: MovieDetails) => {
     try {
       const result = await Share.share({
-        title: '¡Hola!',
+        title: '¡Hola! Te Recomiendo la siguiente película',
         message:
         `
         ${fullMovie.Poster}
         ¡Hola!
         Te recomiendo que veas la siguiente película: ${fullMovie.Title},
         
-        Director: ${fullMovie}
+        Director/es: ${fullMovie.Director}
         Reparto: ${fullMovie.Actors}
         Resumen: ${fullMovie.Plot}
         Rating: ${fullMovie.imdbRating}

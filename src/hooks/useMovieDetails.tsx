@@ -10,8 +10,8 @@ export const useMovieDetails =(movieId: string)=>{
     const [loading, setLoading] = useState(true);
     const getMovieDetails = async (movieId: string) =>{
         try {
-            setLoading(true)
-            const movieResponse = await getMovie(movieId)
+            setLoading(true);
+            const movieResponse = await getMovie(movieId);
             setMovie(movieResponse);
             setLoading(false);
         } catch (error) {
@@ -20,7 +20,11 @@ export const useMovieDetails =(movieId: string)=>{
 
         
     } 
-    useEffect(() => { getMovieDetails(movieId)}, [])
+    useEffect(() => {
+        setLoading(true) ;
+        getMovieDetails(movieId);
+        setLoading(false);
+    }, [])
 
     return{
         movie,

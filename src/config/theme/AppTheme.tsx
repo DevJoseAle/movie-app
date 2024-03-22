@@ -52,8 +52,6 @@ export const globalStyles = StyleSheet.create({
   },
   customHeader:{
     backgroundColor: colors.secondary,
-    height:100,
-
-
+   
   }
 });

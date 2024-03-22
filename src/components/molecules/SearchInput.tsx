@@ -1,25 +1,36 @@
-import React, { useState } from 'react'
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Alert, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { Icon } from 'react-native-vector-icons/Icon'
 import { CustomIcon } from './CustomIcon'
 import { colors } from '../../config/theme/AppTheme'
-  interface Props{
-    setSearchTerm: (value:string)=>void,
-    searchTerm: string
+import { getMovieByTitle } from '../../api/getMoviesByTitle'
+import { Movie } from '../../interfaces/responseInterface'
+import { SearchButton } from '../atoms/SearchButton'
+
+
+interface Props {
+  setDataMovies: (value: any) => void
+  dataMovies: any
+}
+export const SearchInput = ({setDataMovies, dataMovies}:Props) => {
+
+  const [textInputValue, setTextInputValue] = useState('');
+
+
+  const handleInputSubmit = async() => {
+    // Realizar alguna acción cuando se presione "Enviar" en el teclado
+   const movies =  await getMovieByTitle(textInputValue);
+   setDataMovies(movies)
+  };
+
+  const handleDelete = () => {
+    setTextInputValue('')
+    setDataMovies([])
   }
-export const SearchInput = ({setSearchTerm, searchTerm}:Props) => {
 
-  const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
-
-  const handleChangeText = (text: string) => {
-    setLocalSearchTerm(text.trim()); 
-  };
-
-  const submit = () => {
-    
-    setSearchTerm(localSearchTerm); 
-  };
-
+  useEffect(() => {
+    console.log(dataMovies)
+  }, [dataMovies])
 
 
   return (
@@ -31,26 +42,27 @@ export const SearchInput = ({setSearchTerm, searchTerm}:Props) => {
           name={'search-outline'} 
           size={30} color={colors.text}
           isPressable
-          onpress={submit}
+          onpress={handleInputSubmit}
           />
 
           <TextInput
           style={styles.input}
           
           placeholder="Ej: Harry Potter"
-          onChangeText={handleChangeText}
-          onSubmitEditing={submit}
+          onChangeText={setTextInputValue}
+          onSubmitEditing={handleInputSubmit}
           inputMode='text'
-          value={localSearchTerm}
+          value={textInputValue}
           
           />
        </View> 
        <View style={{marginTop: 10}}>
-        <Pressable 
-          onPress={()=> {}}
-          style={({pressed}) => [{opacity: pressed ? 0.7 : 1},styles.toSearchButton]}>
-          <Text style={{color: colors.text, fontWeight: 'bold', fontSize: 20}}>¡Presiona para buscar!</Text>
-        </Pressable>
+        { dataMovies.length > 1 
+         ?<SearchButton title={'Borrar'} fn={handleDelete} />
+        : <SearchButton title={'Borrar'} fn={handleInputSubmit} />
+          
+        }
+
         </View>
     </>
   )
@@ -80,23 +92,5 @@ const styles = StyleSheet.create({
       paddingTop:0,
       fontSize:20
 
-    },
-    toSearchButton: {
-      width: '90%',
-      height: 50,
-      marginHorizontal:10,
-      backgroundColor: colors.primary,
-      borderRadius: 10,
-      justifyContent: 'center',
-      alignItems: 'center',
-      alignSelf: 'center',
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5,
-  }
+    }
 })

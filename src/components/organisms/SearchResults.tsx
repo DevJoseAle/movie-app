@@ -33,7 +33,7 @@ export const SearchResults = ({searchResults, searchTerm, setSearchTerm}:Props) 
             <FlatList
             data={searchResults && Array.isArray(searchResults) ? searchResults : []} 
             keyExtractor={(item) => item.imdbID}
-            renderItem={({item}) => <MovieListItem movie={item}/>}
+            renderItem={({item}) => <MovieListItem movie={item} isFavorite={false}/>}
             />
           </View>
   )
