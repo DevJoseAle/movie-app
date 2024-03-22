@@ -59,7 +59,7 @@ export const SearchInput = ({setDataMovies, dataMovies}:Props) => {
        <View style={{marginTop: 10}}>
         { dataMovies.length > 1 
          ?<SearchButton title={'Borrar'} fn={handleDelete} />
-        : <SearchButton title={'Borrar'} fn={handleInputSubmit} />
+        : <SearchButton title={'¡Buscar!'} fn={handleInputSubmit} />
           
         }
 
