@@ -2,12 +2,12 @@
 
 PelículasApp es una aplicación móvil desarrollada en React Native para buscar películas, ver detalles y agregarlas a favoritos.
 
-<div style="display: flex;">
-    <img src="https://drive.google.com/file/d/143Vjjwzj8a3_ipmzvc8NNItALJtOQThw/view?usp=drive_link" alt="Imagen 1" style="width: 200px; height: auto;">
-    <img src="https://drive.google.com/file/d/1yqaehnc4I2RfasqkQ1hEdStHe6PYG2mq/view?usp=drive_link" alt="Imagen 2" style="width: 200px; height: auto;">
-    <img src="https://drive.google.com/file/d/1mTtZPgGJEmGPFqUlkZ1GvfXEr-PHwMer/view?usp=drive_link" alt="Imagen 3" style="width: 200px; height: auto;">
-    <img src="https://drive.google.com/file/d/1V6wo2eGDdmaeHgdYh5TgY1zvEfoJkom3/view?usp=drive_link" alt="Imagen 3" style="width: 200px; height: auto;">
-</div>
+![IOSIMAGE](./mocks/img1.png)
+![IOSIMAGE](./mocks/img2.png)
+![IOSIMAGE](./mocks/img3.png)
+![IOSIMAGE](./mocks/img4.png)
+
+
 
 ## Librerías utilizadas
 
