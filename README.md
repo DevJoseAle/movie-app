@@ -1,79 +1,40 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# PelículasApp
 
-# Getting Started
+PelículasApp es una aplicación móvil desarrollada en React Native para buscar películas, ver detalles y agregarlas a favoritos.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Librerías utilizadas
 
-## Step 1: Start the Metro Server
+### React
+React es una biblioteca de JavaScript para construir interfaces de usuario.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+### Redux
+Redux es una librería para el manejo del estado de la aplicación en aplicaciones JavaScript.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+### React Navigation
+React Navigation es una librería de navegación para React Native que permite la navegación entre pantallas en la aplicación.
 
-```bash
-# using npm
-npm start
+### Axios
+Axios es un cliente HTTP basado en promesas para el navegador y Node.js.
 
-# OR using Yarn
-yarn start
-```
+### Redux Toolkit
+Redux Toolkit es un conjunto de herramientas de Redux que facilita la escritura de código Redux más limpio y eficiente.
 
-## Step 2: Start your Application
+### React Toast Message
+React Toast Message es una librería para mostrar mensajes emergentes en la aplicación.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## Estructura del proyecto
 
-### For Android
+PelículasApp utiliza Atomic Design para organizar sus componentes.
 
-```bash
-# using npm
-npm run android
+- **Atoms**: Componentes más básicos y simples.
+- **Molecules**: Componentes que combinan varios átomos.
+- **Organisms**: Componentes más complejos que pueden incluir múltiples moléculas y átomos.
+- **Pages**: Páginas de la aplicación que combinan varios templates y organismos.
 
-# OR using Yarn
-yarn android
-```
+## Pasos para ejecutar
 
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+1. Clona el repositorio desde.
+2. Navega al directorio del proyecto.
+3. Ejecuta `yarn install` o `npm install` para instalar las dependencias.
+4. Ejecuta `yarn start` o `npm start`.
+5. Selecciona el sistema operativo (iOS o Android) para iniciar la aplicación.
