@@ -4,7 +4,6 @@ import { HomePage } from '../components/pages/HomePage';
 import { colors } from '../config/theme/AppTheme';
 import { CustomIcon } from '../components/molecules/CustomIcon';
 import { FavoritePage } from '../components/pages/FavoritePage';
-import { SearchResultsPage } from '../components/pages/SearchResultsPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,22 +12,25 @@ export const BottomTabs = () => {
     <Tab.Navigator 
     initialRouteName="Inicio"
     screenOptions={{
-      tabBarShowLabel: false,
+      tabBarLabelStyle: {
+        fontSize: 12,
+        color:  colors.text
+      },
       headerShown: false,
       tabBarStyle: {
         backgroundColor: colors.secondary,
         borderTopWidth: 0,
         borderTopColor: 'black',
-        height: 80,
+        height: 70
       },
-      tabBarActiveTintColor: colors.text,
+      tabBarActiveTintColor: colors.primary,
       tabBarInactiveTintColor: 'gray',
       }}>
       <Tab.Screen 
         name="Home"  
         options={{
           title:'Inicio',
-          tabBarIcon: ({color})=> (<CustomIcon name='home-outline' size={35} color={color} isPressable={false}/>)
+          tabBarIcon: ({color})=> (<CustomIcon name='home-outline' size={25} color={color} isPressable={false}/>)
         }} 
         component={Navigation} 
       />
@@ -49,14 +51,13 @@ export const BottomTabs = () => {
         tabBarIcon: ({color})=> (
         <CustomIcon 
           name='heart-outline' 
-          size={35} 
+          size={28} 
           color={color} 
           isPressable={false}
         />)
       }} 
       component={FavoritePage} 
       />
-      
     </Tab.Navigator>
   );
 }

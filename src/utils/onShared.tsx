@@ -1,30 +1,28 @@
 import { Share, Alert } from "react-native";
 import toastMessages from "./toastMessages";
 import { MovieDetails } from "../interfaces/responseInterface";
-import { FilmDetail } from "../interfaces/filmInterfaces";
-import { posterData } from "../api/posterData";
 
-export const onShare = async (fullMovie: FilmDetail) => {
+export const onShare = async (fullMovie: MovieDetails) => {
     try {
       const result = await Share.share({
         title: '¡Hola! Te Recomiendo la siguiente película',
         message:
         `
-        ${posterData[fullMovie.episode_id]}
+        ${fullMovie.Poster}
         ¡Hola!
-        Te recomiendo que veas la siguiente película: ${fullMovie.title},
+        Te recomiendo que veas la siguiente película: ${fullMovie.Title},
         
-        Director/es: ${fullMovie.director}
-        Reparto: ${fullMovie.characters}
-        Resumen: ${fullMovie.planets}
-
+        Director/es: ${fullMovie.Director}
+        Reparto: ${fullMovie.Actors}
+        Resumen: ${fullMovie.Plot}
+        Rating: ${fullMovie.imdbRating}
 
         ` ,
         
       },
       {
         dialogTitle: 'Compartir',
-        subject: `Te recomiendo la siguiente Película: ${fullMovie.title}`,
+        subject: `Te recomiendo la siguiente Película: ${fullMovie.Title}`,
       }
       );
       if (result.action === Share.sharedAction) {
@@ -36,6 +34,7 @@ export const onShare = async (fullMovie: FilmDetail) => {
         toastMessages({type: 'error', text1: 'Lo sentimos🥲', text2: 'No hemos podido compartir esta peli!'})
       }
     } catch (error: any) {
+      console.log(error);
       Alert.alert(error.message);
     }
   };

@@ -1,35 +1,32 @@
 import React from 'react'
-import {  View, FlatList, ImageBackground } from 'react-native';
-import {  globalStyles } from '../../config/theme/AppTheme'
+import { ScrollView, Text, View, FlatList, StyleSheet, Image, Platform, Pressable } from 'react-native';
+import { colors, globalStyles } from '../../config/theme/AppTheme'
+import { useRecommendedMovies } from '../../hooks/useRecommendedMovies'
+import { Movie } from '../../interfaces/responseInterface';
+import { CustomIcon } from '../molecules/CustomIcon';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { RootStackParams } from '../../navigator/Navigation';
 import { MovieListItem } from '../molecules/MovieListItem';
 import { useAppSelector } from '../../redux/hooks';
+import { Title } from '../atoms/Title';
 import { NoFavorites } from '../atoms/NoFavorites';
-
 
 export const FavoritePage = () => {
   
-  const favorites = useAppSelector((state) => state.favoritesSlice);
+  const favorites = useAppSelector((state) => state.favoritesSlice)
   return (
     <View
        style={ globalStyles.mainContainer}
     >
-      <ImageBackground
-      source={require('../../assets/bg3.jpg')}
-      style={{flex:1, opacity:1}}
-      >
-
       {
         favorites.length > 0
         ? <FlatList
-        data={favorites}
-        keyExtractor={(item) => item.episode_id}
-        renderItem={({item}) => <MovieListItem 
-        movie={item} 
-        />}
-        />
+            data={favorites}
+            keyExtractor={(item) => item.imdbID}
+            renderItem={({item}) => <MovieListItem movie={item} />}
+          />
         : <NoFavorites/>
       }
-      </ImageBackground>
     </View>
   )
 }

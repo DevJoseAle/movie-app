@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import {  Image, ImageBackground, ScrollView, View } from 'react-native'
+import {  View } from 'react-native'
 import {  globalStyles } from '../../config/theme/AppTheme';
+import { SearchOrganism } from '../organisms/SearchOrganism';
+import { Movie } from '../../interfaces/responseInterface';
 import { RecommendedSection } from '../organisms/RecommendedSection';
 import { useRecommendedMovies } from '../../hooks/useRecommendedMovies';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,14 +11,14 @@ import { CustomLoadingSpinner } from '../organisms/CustomLoadingSpinner';
 
 export const HomePage = () => {
  
-    const {movies, loading, data} = useRecommendedMovies()
+    const {movies2023, movies2024, loading, data} = useRecommendedMovies()
 
     const getData = async (item: string) => {
       try {
         const jsonValue = await AsyncStorage.getItem(item);
         return jsonValue != null ? JSON.parse(jsonValue) : null;
       } catch (e) {
-       console.log(e, 'Error al obtener data');
+       console.log(e, 'Error al obtener data')
       }
     };
     
@@ -28,34 +30,33 @@ export const HomePage = () => {
     }, [])
     if(loading) return <CustomLoadingSpinner />
   return (
-    <ScrollView
+    <View
     style={
         globalStyles.mainContainer
     }>  
-     <ImageBackground
-      source={require('../../assets/bg3.jpg')}
-      style={{flex:1, opacity:1}}
-      >
 
       {/* Busqueda  */}
-      {/* <SearchOrganism
+      <SearchOrganism
      
-     /> */}
+      />
 
-     <View>
-      <View style={{height: 10}}/>
-      <Image 
-        source={require('../../assets/logo.png')} 
-        style={{width:'90%', height: 130, marginVertical: 20, alignSelf: 'center'}}
+      <View style={{marginTop: 20}} />
+   
+      <>
+        <RecommendedSection
+        title={'Mejores 2023:'}
+        movie={movies2023!}
         />
-     </View>
+
+        <View style={{marginTop: 20}} />
+
 
         <RecommendedSection
-        title={''}
-        movie={movies!}
+        title={'Mejores 2024:'}
+        movie={movies2024!}
         />
-         <View style={{marginBottom: 70}} />
-      </ImageBackground>
-    </ScrollView>
+      </>
+
+    </View>
   )
 }

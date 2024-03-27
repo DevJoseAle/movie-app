@@ -1,35 +1,47 @@
 import { useState, useEffect } from "react"
-import { getRecommendedMovies} from "../api/getRecommendedMovies"
+import { getRecommendedMovies2023, getRecommendedMovies2024 } from "../api/getRecommendedMovies"
+import { Movie } from "../interfaces/responseInterface"
 import { getData } from "../utils/getStorage"
-import { FilmDetail } from "../interfaces/filmInterfaces"
 
 export const useRecommendedMovies  = () =>{
 
-
+    //States
   let data;
   const [loading, setLoading] = useState<boolean>(true)
-  const [movies, setMovies] = useState<FilmDetail[] | undefined>([])
+  const [movies2023, setMovies2023] = useState<Movie[] | undefined>([])
+  const [movies2024, setMovies2024] = useState<Movie[] | undefined>([])
 
   const firstApiCall = async () =>{
     try {
-      const getMovies = await getRecommendedMovies();
-      setMovies(getMovies);
-      setLoading(false);
+      
+      setLoading(true)
+      const [moviesData2023 , moviesData2024 ] = await Promise.all([
+         getRecommendedMovies2023(),
+         getRecommendedMovies2024()
 
+      ])
+      if(!moviesData2023 && !moviesData2024){
+        throw new Error('No se encontraron datos')
+      }
+       setMovies2023(moviesData2023)
+       setMovies2024(moviesData2024)
+
+      setLoading(false)
+      
     } catch (error) {
-      console.log('catching error', error);
+      console.log('catching error', error)
     }
 }
 
-  useEffect(() => { 
-    setLoading(true);
-    firstApiCall();
-    data = getData('favorites');
+  useEffect(() => {
+    firstApiCall()
+    data = getData('favorites')
   }, [])
 
   return{
     loading,
-    movies,
+    movies2023,
+    movies2024,
     data
   }
 }

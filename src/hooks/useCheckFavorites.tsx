@@ -1,6 +1,6 @@
 import { useAppSelector } from "../redux/hooks"
 
-export const useCheckFavorites = (episode_id: string) => {
+export const useCheckFavorites = (imdbID: string) => {
     const favorites = useAppSelector((state) => state.favoritesSlice)
-    return favorites.some(movie => movie.episode_id === episode_id)
+    return favorites.some(movie => movie.imdbID === imdbID)
 }
