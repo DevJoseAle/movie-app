@@ -1,17 +1,16 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomePage } from '../components/pages/HomePage';
 import { CustomHeader } from '../components/organisms/CustomHeader';
-import { BottomTabs } from './BottomTabs';
-import { FavoritePage } from '../components/pages/FavoritePage';
 import { MoviePage } from '../components/pages/MoviePage';
-import { colors } from '../config/theme/AppTheme';
-import { SearchResultsPage } from '../components/pages/SearchResultsPage';
+import { MovieCharts } from '../components/pages/MovieCharts';
+
 
 
 export type RootStackParams = {
   Inicio: undefined;
-  Search: undefined,
-  Movie: { movieId: string, previousScreen: string};
+  MovieCharts: { episode_id: string, previousScreen: string},
+  Movie: { episode_id: string, previousScreen: string};
+
 }
 const Stack = createStackNavigator<RootStackParams>();
 
@@ -28,10 +27,10 @@ export const Navigation = () => {
 
       <Stack.Screen 
         options={{
-          header: () => <CustomHeader title="Búsqueda" icon/>
+          header: () => <CustomHeader/>
         }}
-        name="Search" 
-        component={SearchResultsPage} 
+        name="MovieCharts" 
+        component={MovieCharts} 
       />
       <Stack.Screen 
         options={{

@@ -24,13 +24,7 @@ export const CustomIcon = ({name, size, color, onpress, hasBadge = false, isPres
           isPressable 
           ? <Pressable
           onPress={onpress}
-          style={({pressed}) => [
-              {
-                  opacity: pressed ? 0.4 : 1
-                 },
-                 styles.container,
-             ]}
-             
+          style={({pressed}) => [{opacity: pressed ? 0.4 : 1}, styles.container]}
              >
            <Icon name={name} size={size} color={color} />
          </Pressable>

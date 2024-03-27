@@ -13,6 +13,7 @@ interface Props {
     marginBottom?: number,
     marginLeft?: number,
     marginRight?: number,
+    center?: boolean
 }
 
 export const Title = ({
@@ -23,11 +24,9 @@ export const Title = ({
   marginTop = 0,
   marginBottom = 0,
   marginLeft = 0,
-  marginRight = 0
+  marginRight = 0,
+  center=false
   }:Props) => {
-
-    const insets = useSafeAreaInsets().top;
-    const platform = Platform.OS;
 
   return (
     <View
@@ -36,13 +35,15 @@ export const Title = ({
         marginBottom: marginBottom,
         marginLeft: marginLeft,
         marginRight: marginRight,
+        
 
     }}
     >
       <Text style={{
         ...globalStyles.title, 
         color: color ? color : colors.text, 
-        fontSize: size
+        fontSize: size,
+        textAlign: center ? 'center' : 'left',
         }}>{title}</Text>
     </View>
   )

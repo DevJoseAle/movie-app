@@ -8,11 +8,13 @@ import { useAppDispatch } from "../../redux/hooks"
 import { removeFavorite } from "../../redux/slices/favoritesSlice"
 import toastMessages from "../../utils/toastMessages"
 import { onShare } from "../../utils/onShared"
+import { FilmDetail } from "../../interfaces/filmInterfaces"
+import { posterData } from "../../api/posterData"
 
 
 interface Props{
-    movie: Movie
-    isFavorite?: boolean
+    movie: any;
+    isFavorite?: boolean;
   }
   export const MovieListItem = ({movie, isFavorite=true}:Props) => {
 
@@ -21,23 +23,26 @@ interface Props{
     const navigation = useNavigation<NavigationProp<RootStackParams>>();
 
     const removeFavorites = () => {
-      dispatch(removeFavorite({imdbID: movie.imdbID}))
+      dispatch(removeFavorite({episode_id: movie.episode_id.toString()}))
       toastMessages({type: 'error', text1: 'Eliminado de Favoritos', text2: 'Hemos Eliminado esta peli de Favoritos!'})
       
     }
 
     return (
       <Pressable
-      onPress={() => (navigation.navigate('Movie', {movieId: movie.imdbID, previousScreen:'Inicio'} ))}
+      onPress={() => (navigation.navigate('Movie', {episode_id: movie.episode_id.toString(), previousScreen:'Inicio'} ))}
        style={styles.container}>
         <View style={styles.movieCard}>
           <Image
             style={styles.poster}
-            source={{uri: movie.Poster}} />
+            source={{uri: posterData[movie.episode_id]}} />
           
           <View style={{marginLeft: 10, width:'40%'}}>
   
-            <Text style={{textAlign : 'center', color: colors.text, fontWeight: 'bold'}}>{movie.Title}</Text>
+            <Text 
+            style={{textAlign : 'center', color: colors.text, fontWeight: 'bold', fontSize: 16}}>
+              {movie.title}
+            </Text>
           </View>
   
           <View style={{flexDirection: 'row'}}>
@@ -64,7 +69,9 @@ interface Props{
       padding: 9,
       height:90,
       borderRadius: 10,
-      backgroundColor:"#909090BB",
+      borderColor: "#343434",
+      borderWidth: 1.5,
+      backgroundColor:"#0F0F0F",
       shadowColor: "#000",
       shadowOffset: {
         width: 0,

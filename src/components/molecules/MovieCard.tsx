@@ -1,23 +1,32 @@
 import React from 'react'
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
-import { Movie } from '../../interfaces/responseInterface'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { RootStackParams } from '../../navigator/Navigation'
+import { FilmDetail } from '../../interfaces/filmInterfaces'
+import { Title } from '../atoms/Title'
+import { posterData } from '../../api/posterData'
 
 
 interface Props{
-    movie: Movie
+    movie: FilmDetail
+    index: number
+    id:number
 }
 
-export const MovieCard = ({movie}:Props) => {
+export const MovieCard = ({movie, index,id}:Props) => {
   const navigation = useNavigation<NavigationProp<RootStackParams>>()
+  const filmId = index+1
 
   return (
     <Pressable
-     onPress={() => (navigation.navigate('Movie', {movieId: movie.imdbID, previousScreen: 'inicio'}))}
+     onPress={() => (navigation.navigate('Movie', {episode_id: filmId.toString(), previousScreen: 'inicio'}))}
      style={styles.cardContainer}>
-   
-            <Image source={{uri: movie.Poster}} style={styles.image} />
+      <Image style={styles.image} source={{uri: posterData[movie.episode_id]}} />
+      <View style={{position: 'absolute', bottom: 10, backgroundColor: '#0D0C0CC6', width: '100%'}}>
+        <Title title={`${movie.title}`} center size={40} color={'white'}/>
+      </View>
+    
+        
         
     </Pressable>
   )
@@ -26,22 +35,27 @@ export const MovieCard = ({movie}:Props) => {
 
 const styles = StyleSheet.create({
     cardContainer: {
-      width: 130,
-      height: 170,
+      width: 300,
+      height: 420,
       marginHorizontal: 7,
-      backgroundColor: 'white',
+      backgroundColor: '#0D0C0CC6',
       borderRadius: 10,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5,
+      borderColor: "#0080FF7B",
+      borderWidth: 2,
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',
+
+      
     },
     image:{
         flex:1,
+        width: '100%',
+        height: '100%',
         borderRadius:10
+    },
+    text:{
+        color:'white',
+        fontSize:20
     }
   })

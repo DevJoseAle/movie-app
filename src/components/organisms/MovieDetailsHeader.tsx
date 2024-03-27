@@ -1,9 +1,9 @@
 import { StyleSheet, useWindowDimensions, Image, Pressable, Platform, Alert, Share } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
-import { MovieDetails } from "../../interfaces/responseInterface";
+
 import { useNavigation } from "@react-navigation/native";
-import { colors } from '../../config/theme/AppTheme';
+import { colors, globalStyles } from '../../config/theme/AppTheme';
 import { CustomIcon } from '../molecules/CustomIcon';
 import { useAppDispatch } from '../../redux/hooks';
 import { addToFavorites } from '../../redux/slices/favoritesSlice';
@@ -11,11 +11,15 @@ import { addToFavorites } from '../../redux/slices/favoritesSlice';
 import toastMessages from '../../utils/toastMessages';
 import { useCheckFavorites } from '../../hooks/useCheckFavorites';
 import { onShare } from '../../utils/onShared';
+import { FilmDetail } from '../../interfaces/filmInterfaces';
+import { posterData } from '../../api/posterData';
+import { Title } from '../atoms/Title';
 
 
 
 interface Props{
-  fullMovie: MovieDetails,
+  fullMovie: FilmDetail,
+
 }
 
 
@@ -23,34 +27,34 @@ export const MovieDetailHeader = ({fullMovie}: Props) => {
   const navigation = useNavigation();
   const {height: totalHeight} = useWindowDimensions();
   const platform = Platform.OS;
-  const checked = useCheckFavorites(fullMovie.imdbID);
+   const checked = useCheckFavorites(fullMovie.episode_id.toString());
   const dispatch = useAppDispatch()
   
   const handleAddToFavorite = () => {
     dispatch(addToFavorites({
-        Title:  fullMovie!.Title,
-        Year:   fullMovie!.Year,
-        imdbID: fullMovie!.imdbID,
-        Poster: fullMovie!.Poster
+        title:  fullMovie!.title,
+        release_date:   fullMovie!.release_date.toString(),
+        episode_id: fullMovie!.episode_id.toString(),
+        poster: posterData[fullMovie?.episode_id],
       }))
 
-      toastMessages({type: 'success', text1: 'Agregado a Favoritos', text2: 'Hemos Agregado esta peli a Favoritos!'})
+   }
 
-    }
-
-   
   return (
     <>
         <View style={{...styles.container, height: totalHeight * 0.65}}>
             < View style={styles.borderImg}>
             
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{fullMovie.Title}</Text>
-                    <Text style={styles.subTitle}>{fullMovie.Genre}</Text>
-                    <Text style={styles.rating}>{fullMovie.imdbRating}</Text>
+                    <Title title={fullMovie.title} color={colors.white} />
+                    <Title title={fullMovie.release_date.toString()} color={colors.white} size={20} />
+                    
                 </View>
             
-                <Image style={styles.posterImage} source={{uri: fullMovie.Poster}} />
+                <Image 
+                  style={styles.posterImage} 
+                  resizeMode='cover'
+                  source={{uri: posterData[fullMovie?.episode_id]}} />
             </View>
         
         </View>
@@ -67,19 +71,18 @@ export const MovieDetailHeader = ({fullMovie}: Props) => {
             </Pressable>
 
         <View style={styles.heartButton}>
-            <Pressable onPress={() => navigation.goBack()}  >
+            <Pressable onPress={handleAddToFavorite}  >
                 <CustomIcon 
                     name='heart-outline' 
                     size={20} 
                     color={checked ? 'red' : colors.text} 
-                    isPressable={true}
-                    onpress={handleAddToFavorite}
-                    
+                    isPressable={false}               
                     />
             </Pressable>
         </View>
         <View style={styles.sharedButton}>
             <Pressable onPress={() => onShare(fullMovie)}  >
+   
                 <CustomIcon 
                     name={platform === 'ios' ? 'share-outline' : 'share-social-outline' }
                     size={20} 
@@ -125,6 +128,7 @@ const styles = StyleSheet.create({
     },
     posterImage: {
       flex: 1,
+      
     },
   
     marginContainer: {
